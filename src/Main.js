@@ -1,46 +1,32 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 function Main() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showInput, setShowInput] = useState(false);
+  const [bgColor, setBgColor] = useState("white");
 
-  const testimonials = [
-    {
-      quote: "This is the best product",
-      author: "John",
-    },
-    {
-      quote: "Another great testimonial",
-      author: "Doe",
-    },
-    {
-      quote: "Yet another positive review",
-      author: "Smith",
-    },
-  ];
-
-  const handlePrevClick = () => {
-    setCurrentIndex(
-      (currentIndex + testimonials.length - 1) % testimonials.length
-    );
-  };
-
-  const handleNextClick = () => {
-    setCurrentIndex((currentIndex + 1) % testimonials.length);
+  const handleClick = (e) => {
+    setBgColor("#1a1a1a");
+    if (e.target.className === "container") {
+      setShowInput(false);
+      setBgColor("#fff");
+    }
   };
 
   return (
-    <div className="testimonials">
-      <div className="testimonials-quote">
-        {testimonials[currentIndex].quote}
-      </div>
-      <div className="testimonials-author">
-        {testimonials[currentIndex].author}
-      </div>
-      <div className="nav">
-        <button onClick={handlePrevClick}>Prev</button>
-        <button onClick={handleNextClick}>Next</button>
-      </div>
-    </div>
+    <>
+      <section
+        className="container"
+        style={{ backgroundColor: bgColor }}
+        onClick={handleClick}
+      >
+        {showInput ? (
+          <input type="text" placeholder="Search" />
+        ) : (
+          <FaSearch onClick={() => setShowInput(true)} />
+        )}
+      </section>
+    </>
   );
 }
 

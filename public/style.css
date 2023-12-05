@@ -1,38 +1,22 @@
-.testimonials {
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
-.testimonials-quote {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.testimonials-author {
-  font-style: italic;
-  color: #555;
-}
-
-.nav {
-  margin-top: 20px;
-}
-
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 15px;
-  font-size: 16px;
+input {
+  padding: 8px;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
-  margin-right: 10px;
+  outline: none;
 }
 
-button:hover {
-  background-color: #45a049;
+.FaSearch {
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin: 0 8px;
+  color: #333; /* Change the color as per your design */
 }
