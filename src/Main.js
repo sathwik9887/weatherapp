@@ -1,47 +1,31 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function Main() {
-  const [inputValue, setInputValue] = useState("");
+const Main = () => {
+  const [items, setItems] = useState([]);
 
-  function display(value) {
-    setInputValue(inputValue + value);
-  }
-  function calculate() {
-    let answers = eval(inputValue);
-    setInputValue(answers);
-  }
-  function clear() {
-    setInputValue("");
-  }
+  useEffect(() => {
+    axios
+      .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood")
+      .then((res) => {
+        setItems(res.data.meals); 
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  return (
-    <>
-      <h1 className="heading">Calculator</h1>
-      <form name="calc" className="calculator">
-        <input type="text" className="value" value={inputValue} />
-        <span className="num-clear" onClick={() => clear()}>
-          C
-        </span>
-        <span onClick={() => display("/")}>/</span>
-        <span onClick={() => display("*")}>*</span>
-        <span onClick={() => display("7")}>7</span>
-        <span onClick={() => display("8")}>8</span>
-        <span onClick={() => display("9")}>9</span>
-        <span onClick={() => display("-")}>-</span>
-        <span onClick={() => display("4")}>4</span>
-        <span onClick={() => display("5")}>5</span>
-        <span onClick={() => display("6")}>6</span>
-        <span onClick={() => display("+")}>+</span>
-        <span onClick={() => display("1")}>1</span>
-        <span onClick={() => display("2")}>2</span>
-        <span onClick={() => display("3")}>3</span>
-        <span onClick={() => display("0")}>0</span>
-        <span onClick={() => display("00")}>00</span>
-        <span onClick={() => display(".")}>.</span>
-        <span onClick={() => calculate()}>=</span>
-      </form>
-    </>
-  );
-}
+  const itemsList = items.map(({ strMeal, strMealThumb, idMeal }) => (
+    <section key={idMeal} className="card">
+      <img src={strMealThumb} alt={strMeal} />
+      <section className="content">
+        <p>{strMeal}</p>
+        <p>{idMeal}</p>
+      </section>
+    </section>
+  ));
+
+  return <div className="items-container">{itemsList}</div>;
+};
 
 export default Main;
