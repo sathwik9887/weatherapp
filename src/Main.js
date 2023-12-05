@@ -1,30 +1,38 @@
 import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
 
 function Main() {
-  const [showInput, setShowInput] = useState(false);
-  const [bgColor, setBgColor] = useState("white");
+  const [backgroundColor, setBackgroundColor] = useState("white");
+  const [textColor, setTextColor] = useState("#1b1b1b");
+  const [buttonStyle, setButtonStyle] = useState("white");
 
-  const handleClick = (e) => {
-    setBgColor("#1a1a1a");
-    if (e.target.className === "container") {
-      setShowInput(false);
-      setBgColor("#fff");
-    }
-  };
+  function handleClick() {
+    setBackgroundColor((prevColor) =>
+      prevColor === "white" ? "#1b1b1b" : "white"
+    );
+    setTextColor((prevColor) =>
+      prevColor === "#1b1b1b" ? "#ffa31a" : "#1b1b1b"
+    );
+    setButtonStyle((prevColor) =>
+      prevColor === "white" ? "#1b1b1b" : "white"
+    );
+  }
 
   return (
     <>
-      <section
-        className="container"
-        style={{ backgroundColor: bgColor }}
-        onClick={handleClick}
-      >
-        {showInput ? (
-          <input type="text" placeholder="Search" />
-        ) : (
-          <FaSearch onClick={() => setShowInput(true)} />
-        )}
+      <section style={{ backgroundColor, color: textColor }}>
+        <button
+          onClick={handleClick}
+          style={{
+            backgroundColor: buttonStyle,
+            color: textColor,
+            border: `2px solid ${textColor}`,
+          }}
+        >
+          White Theme
+        </button>
+      </section>
+      <section className="content">
+        <h1 className="heading">Welcome to A</h1>
       </section>
     </>
   );
